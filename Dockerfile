@@ -61,6 +61,7 @@ COPY conf/supervisord.conf /etc/supervisord.conf
 # Copy our nginx config
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 COPY conf/app-site.conf /etc/nginx/sites-available/default.conf
+COPY scripts/start.sh /start.sh
 
 # tweak php-fpm config
 RUN sed -i \
@@ -91,8 +92,7 @@ RUN sed -i \
         ${fpm_conf} && \
     find /etc/php5/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
-# Add Scripts
-COPY scripts/start.sh /start.sh
+# Add Permission Scripts
 RUN chmod a+x /start.sh
 
 EXPOSE 80
