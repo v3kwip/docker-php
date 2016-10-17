@@ -30,5 +30,9 @@ done
 # Always chown webroot for better mounting
 chown -Rf nginx.nginx $webroot
 
+# Allow run custom script
+if [ ! -z "$SCRIPT" ] && [ -f "$SCRIPT" ]; then
+  . $SCRIPT
+fi
 # Start supervisord and services
 /usr/bin/supervisord -n -c /etc/supervisord.conf
