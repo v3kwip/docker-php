@@ -1,60 +1,53 @@
 FROM alpine
 MAINTAINER sang@go1.com.au
 
-ENV php_conf /etc/php7/php.ini
-ENV fpm_conf /etc/php7/php-fpm.d/www.conf
+ENV php_conf /etc/php5/php.ini
+ENV fpm_conf /etc/php5/php-fpm.conf
 
-# Add edge cdn
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-    apk add --no-cache bash \
+RUN apk add --no-cache bash \
         supervisor \
         nginx \
         curl \
-        php7 \
-        php7-fpm \
-        php7-bcmath \
-        php7-bz2 \
-        php7-calendar \
-        php7-ctype \
-        php7-curl \
-        php7-dom \
-        php7-exif \
-        php7-ftp \
-        php7-gettext \
-        php7-gd \
-        php7-iconv \
-        php7-intl \
-        php7-imap \
-        php7-json \
-        php7-mysqlnd \
-        php7-mysqli \
-        php7-mcrypt \
-        php7-memcached \
-        php7-mbstring \
-        php7-opcache \
-        php7-openssl \
-        php7-pdo \
-        php7-pdo_mysql \
-        php7-pdo_pgsql \
-        php7-pdo_sqlite \
-        php7-phar \
-        php7-posix \
-        php7-pgsql \
-        php7-session \
-        php7-soap \
-        php7-sockets \
-        php7-sqlite3 \
-        php7-wddx \
-        php7-xml \
-        php7-xmlreader \
-        php7-xsl \
-        php7-zip \
-        php7-zlib \
+        php5 \
+        php5-fpm \
+        php5-bcmath \
+        php5-bz2 \
+        php5-calendar \
+        php5-ctype \
+        php5-curl \
+        php5-dom \
+        php5-exif \
+        php5-ftp \
+        php5-gettext \
+        php5-gd \
+        php5-iconv \
+        php5-intl \
+        php5-imap \
+        php5-json \
+        php5-mysql \
+        php5-mysqli \
+        php5-mcrypt \
+        php5-memcache \
+        php5-opcache \
+        php5-openssl \
+        php5-pdo \
+        php5-pdo_mysql \
+        php5-pdo_pgsql \
+        php5-pdo_sqlite \
+        php5-phar \
+        php5-posix \
+        php5-pgsql \
+        php5-soap \
+        php5-sockets \
+        php5-sqlite3 \
+        php5-wddx \
+        php5-xml \
+        php5-xmlreader \
+        php5-xsl \
+        php5-zip \
+        php5-zlib \
         ca-certificates && \
     rm -rf /var/cache/apk/* && \
-    ln -s /usr/bin/php7 /usr/bin/php && \
     mkdir -p /etc/nginx && \
     mkdir -p /run/nginx && \
     mkdir -p /var/log/supervisor && \
@@ -74,8 +67,8 @@ RUN sed -i \
         -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" \
         -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 100M/g" \
         -e "s/post_max_size\s*=\s*8M/post_max_size = 100M/g" \
-        -e "s/memory_limit\s*=\s*128M/memory_limit = 32M/g" \
-        -e "s/;opcache.memory_consumption=64/opcache.memory_consumption=16/g" \
+        -e "s/memory_limit\s*=\s*128M/memory_limit = 64M/g" \
+        -e "s/;opcache.memory_consumption=64/opcache.memory_consumption=32/g" \
         -e "s/variables_order\s*=\s*\"GPCS\"/variables_order = \"EGPCS\"/g" \
         -e "s/;error_log\s*=\s*php_errors.log/error_log = \/dev\/stderr/g" \
         ${php_conf} && \
@@ -96,7 +89,7 @@ RUN sed -i \
         -e "s/^;clear_env = no$/clear_env = no/" \
         -e "s/^;listen.allowed_clients = 127.0.0.1$/listen.allowed_clients = 127.0.0.1/" \
         ${fpm_conf} && \
-    find /etc/php7/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
+    find /etc/php5/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
 # Add Scripts
 COPY scripts/start.sh /start.sh
