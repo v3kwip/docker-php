@@ -27,13 +27,14 @@ do
     export ${key}=${val}
 done
 
-# Always chown webroot for better mounting
-chown -Rf nginx.nginx $webroot
-
 # Allow run custom script
 if [ ! -z "$SCRIPT" ] && [ -f "$SCRIPT" ]; then
   chmod a+x $SCRIPT
   . $SCRIPT
 fi
+
+# Always chown webroot for better mounting
+chown -Rf nginx.nginx $webroot
+
 # Start supervisord and services
 /usr/bin/supervisord -n -c /etc/supervisord.conf
