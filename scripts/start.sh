@@ -8,6 +8,8 @@ else
   webroot=/app/public
 fi
 
+sed -i "s#Directory /var/www/#Directory ${WEBROOT}/#g" /etc/apache2/conf-available/docker-php.conf
+
 # Allow run custom script
 if [ ! -z "$SCRIPT" ] && [ -f "$SCRIPT" ]; then
   chmod a+x $SCRIPT
