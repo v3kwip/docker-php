@@ -5,6 +5,7 @@ ENV php_conf /etc/php5/php.ini
 ENV fpm_conf /etc/php5/php-fpm.conf
 
 RUN apk add --no-cache bash \
+        openssh-client \
         supervisor \
         nginx \
         curl \
