@@ -8,6 +8,7 @@ else
   webroot=/app/public
 fi
 
+sed -i "s#Directory /var/www/#Directory ${WEBROOT}/#g" /etc/apache2/apache2.conf
 sed -i "s#Directory /var/www/#Directory ${WEBROOT}/#g" /etc/apache2/conf-available/docker-php.conf
 
 # Allow run custom script
