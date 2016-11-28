@@ -76,7 +76,7 @@ RUN sed -i \
         -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 100M/g" \
         -e "s/post_max_size\s*=\s*8M/post_max_size = 100M/g" \
         -e "s/memory_limit\s*=\s*128M/memory_limit = 64M/g" \
-        -e "s/max_execution_time\s*=\s*30/max_execution_time = 120"
+        -e "s/max_execution_time\s*=\s*30/max_execution_time = 120" \
         -e "s/;opcache.memory_consumption=64/opcache.memory_consumption=32/g" \
         -e "s/variables_order\s*=\s*\"GPCS\"/variables_order = \"EGPCS\"/g" \
         -e "s/;error_log\s*=\s*php_errors.log/error_log = \/dev\/stderr/g" \
