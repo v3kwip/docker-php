@@ -16,3 +16,5 @@ fi
 
 # Always chown webroot for better mounting
 chown -Rf www-data.www-data $webroot
+
+apache2-foreground
