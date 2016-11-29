@@ -80,6 +80,7 @@ RUN sed -i \
         -e "s/;opcache.memory_consumption=64/opcache.memory_consumption=32/g" \
         -e "s/variables_order\s*=\s*\"GPCS\"/variables_order = \"EGPCS\"/g" \
         -e "s/;error_log\s*=\s*php_errors.log/error_log = \/dev\/stderr/g" \
+        -e "s/;opcache.error_log\s*=\s*/opcache.error_log = \/dev\/stderr/g" \
         ${php_conf} && \
     sed -i \
         -e "s/;daemonize\s*=\s*yes/daemonize = no/g" \
