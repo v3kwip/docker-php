@@ -12,6 +12,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
         openssh-client \
         rsync \
         shadow \
+        pdftk \
         supervisor \
         nginx \
         curl \
