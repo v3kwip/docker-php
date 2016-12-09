@@ -2,7 +2,20 @@ FROM php:5-apache
 
 # Install modules
 RUN apt-get update \
-    && apt-get install -y libpng12-dev libjpeg-dev libpq-dev git libmcrypt-dev libicu-dev libmemcached-dev libz-dev libxml2-dev libssl-dev libcurl4-openssl-dev zlib1g-dev \
+    && apt-get install -y \
+        git \
+        pdftk \
+        libcurl4-openssl-dev \
+        libicu-dev \
+        libjpeg-dev \
+        libmcrypt-dev \
+        libmemcached-dev \
+        libpng12-dev \
+        libpq-dev \
+        libssl-dev \
+        libxml2-dev \
+        libz-dev \
+        zlib1g-dev \
     && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
     && docker-php-ext-install -j$(nproc) bcmath curl gd gettext intl mbstring mcrypt opcache pdo pdo_mysql xml zip \
     && pecl install memcache && docker-php-ext-enable memcache \
