@@ -17,7 +17,7 @@ RUN apt-get update \
         libz-dev \
         zlib1g-dev \
     && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
-    && docker-php-ext-install -j$(nproc) bcmath curl gd gettext intl mbstring mcrypt opcache pdo pdo_mysql xml zip \
+    && docker-php-ext-install -j$(nproc) bcmath curl gd gettext intl mbstring mysqli mcrypt opcache pdo pdo_mysql xml zip \
     && pecl install memcache && docker-php-ext-enable memcache \
     && pecl install memcached && docker-php-ext-enable memcached \
     && echo "upload_max_filesize = 200M\npost_max_size = 200M" > /usr/local/etc/php/conf.d/uploads.ini \
